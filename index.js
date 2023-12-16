@@ -68,7 +68,7 @@ const verifyAdmin=async(req,res,next)=>{
    next()
 }
 
-    // users related api
+ // users related api
     app.get('/users',verifyToken,verifyAdmin, async(req,res)=>{
       console.log(req.headers)
       const result=await usersCollection.find().toArray();
@@ -225,7 +225,7 @@ const verifyAdmin=async(req,res,next)=>{
     res.send({paymentResult,deleteResult});
   })
   // stats or analytics
-  app.get('/admin-stats', verifyToken,verifyAdmin,async(req,res)=>{
+  app.get('/admin-stats', async(req,res)=>{
     const users=await usersCollection.estimatedDocumentCount();
     const menuItem=await menuCollection.estimatedDocumentCount();
     const orders=await paymentCollection.estimatedDocumentCount();
@@ -247,7 +247,7 @@ const verifyAdmin=async(req,res,next)=>{
       users,
       menuItem,
       orders,
-      revenue
+     revenue
     })
   })
     // Send a ping to confirm a successful connection
